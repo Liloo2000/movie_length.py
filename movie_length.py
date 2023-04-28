@@ -35,24 +35,24 @@ class LongestMovies(MRJob):
 		(user_id, movie_id, rating, timestamp) = line.split('\t')
 		yield movie_id, rating
   
-  def reducer1(self, movie_id, ratings):
-    rating_count = 0
-    for r in ratings:
-        rating_count += 1
-    if rating_count >= self.MIN_COUNT:
-        movie_title = self.movie_title(movie_id)
-        if movie_title != None:
-            yield movie_id, (movie_title, len(movie_title))
+        def reducer1(self, movie_id, ratings):
+          rating_count = 0
+          for r in ratings:
+              rating_count += 1
+          if rating_count >= self.MIN_COUNT:
+              movie_title = self.movie_title(movie_id)
+              if movie_title != None:
+                  yield movie_id, (movie_title, len(movie_title))
 
 
 	def mapper2(self, movie_id, avg_rating):
 		yield None, (avg_rating, movie_id)
     
-  def reducer2(self, _, values):
-    for movie_id, (movie_title, title_len) in sorted(values, key=lambda x: -x[1]):
-        i += 1
-			  if i <= self.SHOW_LIMIT:
-          yield movie_id, (movie_title, title_len)
+        def reducer2(self, _, values):
+          for movie_id, (movie_title, title_len) in sorted(values, key=lambda x: -x[1]):
+              i += 1
+	      if i <= self.SHOW_LIMIT:
+                yield movie_id, (movie_title, title_len)
 
 
 if __name__ == '__main__':
