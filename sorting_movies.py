@@ -43,6 +43,8 @@ class LongestMovies(MRJob):
         yield None, (title_len, movie_id)
 
     def reducer2(self, _, values):
+        print("key:", _)
+        print("values:", values)
         values = list(values)
         sorted_values = sorted(values, key=lambda x: -int(x[0]))
         for i, (title_len, movie_id) in enumerate(sorted_values):
