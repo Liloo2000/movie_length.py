@@ -48,6 +48,7 @@ class LongestMovies(MRJob):
 		yield None, (avg_rating, movie_id)
 	
 	def reducer2(self, _, values):
+		print(values)
 		for movie_id, (movie_title, title_len) in sorted(values, key=lambda x: -int(x[1])):
 			i += 1
 		if i <= self.SHOW_LIMIT:
