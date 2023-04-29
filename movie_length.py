@@ -24,7 +24,8 @@ class LongestMovies(MRJob):
         Pipeline of MapReduce tasks
         '''
         return [
-            MRStep(mapper=self.mapper1, reducer=self.reducer1)
+            MRStep(mapper=self.mapper1, reducer=self.reducer1),
+            MRStep(mapper=self.mapper2, reducer=self.reducer2)
         ]
 
     def mapper1(self, _, line):
