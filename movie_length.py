@@ -41,8 +41,8 @@ class LongestMovies(MRJob):
 			rating_count += 1
 		if rating_count >= self.MIN_COUNT:
 			movie_title = self.movie_title(movie_id)
-		if movie_title != None:
-			yield movie_id, (movie_title, len(movie_title))
+			if movie_title != None:
+				yield movie_id, (movie_title, len(movie_title))
 	
 	def mapper2(self, movie_id, avg_rating):
 		yield None, (avg_rating, movie_id)
