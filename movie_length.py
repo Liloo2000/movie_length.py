@@ -47,9 +47,8 @@ class LongestMovies(MRJob):
 	def mapper2(self, movie_id, avg_rating):
 		yield None, (avg_rating, movie_id)
 	
-	def reducer2(self, key, values):
+	def reducer2(self, _, values):
 		values = list(values)
-		print(key.decode())
 		for movie_id, (movie_title, title_len) in sorted(values, key=lambda x: -int(x[1])):
 			print(f'{movie_title.decode()} ({title_len.decode()} min)')
 			i += 1
